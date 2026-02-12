@@ -1,15 +1,17 @@
-from sqlalchemy import Column, Integer, String, Date, Float
-from .database import Base
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Text
+from sqlalchemy.orm import relationship
+from datetime import datetime
 
-class User(Base):
-    __tablename__ = "users"
+class Course(Base):
+    __tablename__ = "courses"
 
-    id = Column(Integer, primary_key=True, index=True)
-    first_name = Column(String)
-    last_name = Column(String)
-    username = Column(String, unique=True, index=True)
-    birth_date = Column(Date)
-    password_hash = Column(String)
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    topic = Column(String)
+    level = Column(String)
+    duration = Column(String)
+    content = Column(Text)
+    time_spent = Column(Integer, default=0)  # minutes
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-    study_time = Column(Float, default=0)
-    trees_financed = Column(Integer, default=0)
+    user = relationship("User", backref="courses")
