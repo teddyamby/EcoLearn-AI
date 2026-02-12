@@ -1,10 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Parcours généré</h2>
 
-<pre style="white-space: pre-wrap;">
-{{ course }}
-</pre>
+<h2>📘 Parcours généré</h2>
 
-<a href="/impact" class="btn btn-outline">Voir mon impact</a>
+<div style="white-space: pre-wrap; margin-bottom: 30px;">
+    {{ course }}
+</div>
+
+<hr style="margin: 30px 0;">
+
+<h3>🚀 Que veux-tu faire maintenant ?</h3>
+
+<div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+
+    <a href="/dashboard" class="btn btn-primary">
+        📊 Dashboard utilisateur
+    </a>
+
+    <a href="/impact" class="btn btn-outline">
+        🌍 Impact & Reforestation
+    </a>
+
+    <a href="/generator" class="btn btn-primary">
+        🔁 Générer un autre parcours
+    </a>
+
+</div>
+
 {% endblock %}
