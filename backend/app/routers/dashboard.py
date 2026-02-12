@@ -1,7 +1,10 @@
 from fastapi import APIRouter, Request, Cookie, Depends
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
+
 from ..database import SessionLocal
 from ..models import User
+from ..templates_engine import templates
 
 router = APIRouter()
 
@@ -22,7 +25,8 @@ def dashboard(
         return RedirectResponse("/login", status_code=303)
 
     user = db.query(User).get(int(user_id))
-    return request.app.templates.TemplateResponse(
+
+    return templates.TemplateResponse(
         "dashboard.html",
         {"request": request, "user": user}
     )
