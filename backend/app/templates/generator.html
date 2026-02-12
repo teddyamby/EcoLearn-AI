@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Que veux-tu apprendre aujourd’hui ?</h2>
+
+<form method="post">
+    <input type="text" name="topic" placeholder="Sujet" required>
+    <select name="level">
+        <option>Débutant</option>
+        <option>Intermédiaire</option>
+        <option>Avancé</option>
+    </select>
+    <select name="time">
+        <option>30 minutes</option>
+        <option>1 heure</option>
+        <option>2 heures</option>
+    </select>
+
+    <button class="btn btn-primary">Générer</button>
+</form>
+{% endblock %}

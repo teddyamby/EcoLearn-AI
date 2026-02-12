@@ -1,0 +1,71 @@
+from fastapi import APIRouter, Request, Form, Depends
+from fastapi.responses import RedirectResponse
+from sqlalchemy.orm import Session
+from datetime import date
+
+from ..database import SessionLocal
+from ..models import User
+from ..auth import hash_password
+
+router = APIRouter()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@router.get("/register")
+def register_form(request: Request):
+    return request.app.templates.TemplateResponse(
+        "register.html", {"request": request}
+    )
+
+@router.post("/register")
+def register_user(
+    request: Request,
+    first_name: str = Form(...),
+    last_name: str = Form(...),
+    username: str = Form(...),
+    birth_date: date = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    user = User(
+        first_name=first_name,
+        last_name=last_name,
+        username=username,
+        birth_date=birth_date,
+        password_hash=hash_password(password)
+    )
+    db.add(user)
+    db.commit()
+    return RedirectResponse("/login", status_code=303)
+
+
+from ..auth import verify_password
+from fastapi.responses import HTMLResponse
+
+@router.get("/login")
+def login_form(request: Request):
+    return request.app.templates.TemplateResponse(
+        "login.html", {"request": request}
+    )
+
+@router.post("/login")
+def login_user(
+    request: Request,
+    username: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(User.username == username).first()
+
+    if not user or not verify_password(password, user.password_hash):
+        return HTMLResponse("Identifiants invalides", status_code=401)
+
+    response = RedirectResponse("/dashboard", status_code=303)
+    response.set_cookie(key="user_id", value=str(user.id))
+    return response
+

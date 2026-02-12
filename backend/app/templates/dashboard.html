@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Bonjour {{ user.username }} 🌿</h2>
+
+<p>
+    Bienvenue dans ton espace EcoLearn AI.
+    Chaque minute d’apprentissage contribue à un monde plus durable.
+</p>
+
+<ul>
+    <li>🌳 Arbres financés : {{ user.trees_financed }}</li>
+    <li>⏱ Temps d’étude total : {{ user.study_time }} h</li>
+</ul>
+
+<a href="/generator" class="btn btn-primary">Accéder à l’apprentissage</a>
+{% endblock %}
