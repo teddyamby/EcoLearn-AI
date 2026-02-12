@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request, Cookie, Depends
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
+
 from ..database import SessionLocal
 from ..models import User
 from ..templates_engine import templates
@@ -27,9 +28,5 @@ def dashboard(
 
     return templates.TemplateResponse(
         "dashboard.html",
-        {
-            "request": request,
-            "user": user,
-            "courses": user.courses
-        }
+        {"request": request, "user": user}
     )
