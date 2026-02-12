@@ -281,3 +281,46 @@ footer {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: #f3faf7;
+    color: var(--green-dark);
+}
+
+tr:hover {
+    background: #f9fdfb;
+}
+
+input[type="text"] {
+    max-width: 350px;
+}
+
+
+
+
+
+
+
+
