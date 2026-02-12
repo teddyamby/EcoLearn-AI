@@ -9,3 +9,17 @@ def impact(request: Request):
         "impact.html",
         {"request": request}
     )
+
+@router.get("/pricing")
+def pricing(request: Request):
+    return templates.TemplateResponse(
+        "pricing.html",
+        {"request": request}
+    )
+
+@router.get("/support")
+def support(request: Request):
+    return templates.TemplateResponse(
+        "support.html",
+        {"request": request}
+    )
