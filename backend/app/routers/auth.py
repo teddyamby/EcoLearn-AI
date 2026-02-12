@@ -100,3 +100,12 @@ def login_user(
         secure=True  # OK sur Render (HTTPS)
     )
     return response
+
+
+
+
+@router.get("/logout")
+def logout():
+    response = RedirectResponse("/login", status_code=303)
+    response.delete_cookie("user_id")
+    return response
