@@ -4,5 +4,6 @@ sqlalchemy
 psycopg2-binary
 passlib[bcrypt]
 python-jose
-jinja2
 openai
+pytest
+python-multipart
