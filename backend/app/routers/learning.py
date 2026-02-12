@@ -1,12 +1,14 @@
 from fastapi import APIRouter, Request, Form
 from ..ai_service import generate_course
+from ..templates_engine import templates
 
 router = APIRouter()
 
 @router.get("/generator")
 def generator(request: Request):
-    return request.app.templates.TemplateResponse(
-        "generator.html", {"request": request}
+    return templates.TemplateResponse(
+        "generator.html",
+        {"request": request}
     )
 
 @router.post("/generator")
@@ -17,7 +19,8 @@ def generate(
     time: str = Form(...)
 ):
     course = generate_course(topic, level, time)
-    return request.app.templates.TemplateResponse(
+
+    return templates.TemplateResponse(
         "learning.html",
         {"request": request, "course": course}
     )
