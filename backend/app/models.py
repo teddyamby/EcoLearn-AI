@@ -11,7 +11,5 @@ class User(Base):
     birth_date = Column(Date)
     password_hash = Column(String)
 
-    # 📊 Données écologiques
-    study_time = Column(Float, default=0.0)  # en heures
-    co2_consumed = Column(Float, default=0.0)  # en grammes
+    study_time = Column(Float, default=0)
     trees_financed = Column(Integer, default=0)
