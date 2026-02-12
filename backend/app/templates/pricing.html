@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>💳 Tarification EcoLearn AI</h2>
+
+<p>
+    Tu es actuellement en <strong>mode gratuit pendant 15 jours</strong>.
+    Après cette période, pour continuer à apprendre et à avoir un impact positif,
+    tu devras choisir un abonnement.
+</p>
+
+<div class="pricing-grid">
+
+    <!-- FREE PLAN -->
+    <div class="pricing-card">
+        <h3>🌿 Free</h3>
+        <p class="price">0 €</p>
+        <p class="duration">Pendant 15 jours</p>
+
+        <ul>
+            <li>✔ Accès au dashboard</li>
+            <li>✔ Générateur de parcours IA (limité)</li>
+            <li>✔ Page Impact & Reforestation</li>
+            <li>✖ Accès illimité à l’IA</li>
+            <li>✖ Support prioritaire</li>
+        </ul>
+
+        <span class="badge">Plan actuel</span>
+    </div>
+
+    <!-- PREMIUM PLAN -->
+    <div class="pricing-card featured">
+        <h3>🚀 Premium</h3>
+        <p class="price">5,99 €</p>
+        <p class="duration">par mois</p>
+
+        <ul>
+            <li>✔ Accès illimité au générateur IA</li>
+            <li>✔ Parcours personnalisés</li>
+            <li>✔ Suivi d’impact avancé</li>
+            <li>✔ Support prioritaire</li>
+            <li>✔ Nouvelles fonctionnalités</li>
+        </ul>
+
+        <a href="#" class="btn btn-primary">
+            Passer au Premium
+        </a>
+    </div>
+
+</div>
+
+<!-- CTA UNIFIÉS -->
+<div class="cta-group">
+    <a href="/dashboard" class="btn btn-outline">📊 Dashboard</a>
+    <a href="/generator" class="btn btn-primary">🤖 Générer un parcours</a>
+</div>
+
+{% endblock %}
