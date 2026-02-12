@@ -104,8 +104,3 @@ def login_user(
 
 
 
-@router.get("/logout")
-def logout():
-    response = RedirectResponse("/login", status_code=303)
-    response.delete_cookie("user_id")
-    return response
