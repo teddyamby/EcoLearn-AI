@@ -7,3 +7,4 @@ python-jose
 openai
 pytest
 python-multipart
+jinja2
