@@ -1,33 +1,49 @@
 import os
 from openai import OpenAI
 
-client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
-)
-
 def generate_course(topic: str, level: str, time: str) -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    # 🔒 Vérification clé API
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY manquante")
+
+    client = OpenAI(api_key=api_key)
+
     prompt = f"""
 Tu es un expert en pédagogie écologique.
 
-Crée un parcours d’apprentissage structuré et clair.
+Crée un parcours d’apprentissage structuré.
 
 Sujet : {topic}
 Niveau : {level}
 Temps disponible : {time}
 
 Le parcours doit contenir :
-1. Une introduction
-2. Des modules numérotés
-3. Des objectifs pédagogiques
-4. Un mini quiz de fin
+- Une introduction
+- Des modules clairs
+- Des conseils pratiques
+- Un mini quiz final
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.7
-    )
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=700
+        )
 
-    return response.choices[0].message.content
+        return response.choices[0].message.content
+
+    except Exception as e:
+        # ⚠️ Log serveur Render
+        print("ERREUR OPENAI:", str(e))
+
+        # ⚠️ Message utilisateur
+        return (
+            "⚠️ Impossible de générer le cours pour le moment.\n\n"
+            "Vérifie la clé API OpenAI ou réessaie plus tard."
+        )
