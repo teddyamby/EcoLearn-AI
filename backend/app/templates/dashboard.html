@@ -1,17 +1,30 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Bonjour {{ user.username }} 🌿</h2>
 
-<p>
-    Bienvenue dans ton espace EcoLearn AI.
-    Chaque minute d’apprentissage contribue à un monde plus durable.
-</p>
+<h2>Bonjour {{ user.username }} 🌱</h2>
 
+<p><strong>🌍 CO₂ consommé :</strong> {{ user.co2_consumed }} kg</p>
+<p><strong>⏱ Temps d’étude :</strong> {{ user.study_time }} h</p>
+
+<a href="/generator" class="btn btn-primary">🤖 Générer un parcours</a>
+<a href="/logout" class="btn btn-outline">🚪 Se déconnecter</a>
+
+<hr style="margin:30px 0;">
+
+<h3>📚 Tes parcours réalisés</h3>
+
+{% if courses %}
 <ul>
-    <li>🌳 Arbres financés : {{ user.trees_financed }}</li>
-    <li>⏱ Temps d’étude total : {{ user.study_time }} h</li>
+    {% for course in courses %}
+        <li style="margin-bottom:15px;">
+            <strong>{{ course.title }}</strong>  
+            ({{ course.level }} – {{ course.duration }})  
+            🌿 CO₂ : {{ course.co2_generated }} kg
+        </li>
+    {% endfor %}
 </ul>
+{% else %}
+<p>Aucun parcours réalisé pour le moment.</p>
+{% endif %}
 
-<a href="/generator" class="btn btn-primary">Accéder à l’apprentissage</a>
 {% endblock %}
