@@ -1,30 +1,35 @@
 {% extends "base.html" %}
+
 {% block content %}
 
 <h2>📘 Parcours généré</h2>
 
-<div style="white-space: pre-wrap; margin-bottom: 30px;">
+<p>
+    Voici ton parcours d’apprentissage personnalisé.
+    Prends le temps de le parcourir et applique les actions proposées 🌿
+</p>
+
+<div style="white-space: pre-wrap; margin-top: 25px;">
     {{ course }}
 </div>
 
-<hr style="margin: 30px 0;">
+<hr style="margin: 40px 0;">
 
 <h3>🚀 Que veux-tu faire maintenant ?</h3>
 
-<div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
-
-    <a href="/dashboard" class="btn btn-primary">
-        📊 Dashboard utilisateur
-    </a>
-
-    <a href="/impact" class="btn btn-outline">
-        🌍 Impact & Reforestation
+<!-- CTA UNIFIÉS -->
+<div class="cta-group">
+    <a href="/dashboard" class="btn btn-outline">
+        📊 Retour au dashboard
     </a>
 
     <a href="/generator" class="btn btn-primary">
         🔁 Générer un autre parcours
     </a>
 
+    <a href="/impact" class="btn btn-outline">
+        🌍 Impact & Reforestation
+    </a>
 </div>
 
 {% endblock %}
