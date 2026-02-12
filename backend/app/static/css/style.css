@@ -187,3 +187,40 @@ footer {
         padding: 25px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+/* ---------------- STAT CARDS ---------------- */
+
+.stat-card {
+    background: linear-gradient(135deg, #f1faee, #ffffff);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.stat-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--green-main);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--green-dark);
+}
