@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>📚 Mes cours récents</h2>
+
+<input type="text" id="searchInput" placeholder="Rechercher un cours..."
+       onkeyup="filterCourses()" />
+
+<table style="width:100%; margin-top:25px;">
+    <thead>
+        <tr>
+            <th>Sujet</th>
+            <th>Niveau</th>
+            <th>Durée prévue</th>
+            <th>Temps passé</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody id="courseTable">
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.topic }}</td>
+            <td>{{ course.level }}</td>
+            <td>{{ course.duration }}</td>
+            <td>{{ course.time_spent }} min</td>
+            <td>{{ course.created_at.strftime('%d/%m/%Y') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="cta-group">
+    <a href="/generator" class="btn btn-primary">🤖 Générer un parcours</a>
+    <a href="/dashboard" class="btn btn-outline">📊 Dashboard</a>
+</div>
+
+<script>
+function filterCourses() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("#courseTable tr");
+
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+    });
+}
+</script>
+
+{% endblock %}
