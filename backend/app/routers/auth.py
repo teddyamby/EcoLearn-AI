@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Request, Form, Depends
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, HTMLResponse
 from sqlalchemy.orm import Session
 from datetime import date
 
 from ..database import SessionLocal
 from ..models import User
-from ..auth import hash_password
+from ..auth import hash_password, verify_password
+from ..templates_engine import templates
 
 router = APIRouter()
 
@@ -16,10 +17,13 @@ def get_db():
     finally:
         db.close()
 
+# -------- REGISTER --------
+
 @router.get("/register")
 def register_form(request: Request):
-    return request.app.templates.TemplateResponse(
-        "register.html", {"request": request}
+    return templates.TemplateResponse(
+        "register.html",
+        {"request": request}
     )
 
 @router.post("/register")
@@ -43,14 +47,13 @@ def register_user(
     db.commit()
     return RedirectResponse("/login", status_code=303)
 
-
-from ..auth import verify_password
-from fastapi.responses import HTMLResponse
+# -------- LOGIN --------
 
 @router.get("/login")
 def login_form(request: Request):
-    return request.app.templates.TemplateResponse(
-        "login.html", {"request": request}
+    return templates.TemplateResponse(
+        "login.html",
+        {"request": request}
     )
 
 @router.post("/login")
@@ -66,6 +69,5 @@ def login_user(
         return HTMLResponse("Identifiants invalides", status_code=401)
 
     response = RedirectResponse("/dashboard", status_code=303)
-    response.set_cookie(key="user_id", value=str(user.id))
+    response.set_cookie(key="user_id", value=str(user.id), httponly=True)
     return response
-
