@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>EcoLearn AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS principal -->
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
-    <div class="nav-brand">🌱 EcoLearn AI</div>
+    <div class="nav-brand">
+        🌱 EcoLearn AI
+    </div>
 
     <div class="nav-links">
         <a href="/dashboard">📊 Dashboard</a>
+        <a href="/my-courses">📚 Mes cours</a>
         <a href="/generator">🤖 Générer</a>
         <a href="/impact">🌍 Impact</a>
         <a href="/pricing">💳 Tarifs</a>
@@ -19,13 +26,15 @@
     </div>
 </nav>
 
-
+<!-- ================= CONTENU ================= -->
 <main class="container">
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 </main>
 
+<!-- ================= FOOTER ================= -->
 <footer>
-    © 2026 EcoLearn AI – by CM
+    <p>© 2026 EcoLearn AI – by CM</p>
 </footer>
 
 </body>
