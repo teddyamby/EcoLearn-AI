@@ -8,8 +8,6 @@ from ..templates_engine import templates
 
 router = APIRouter()
 
-CO2_PER_HOUR = 20  # grammes de CO2 / heure (estimation pédagogique)
-
 def get_db():
     db = SessionLocal()
     try:
@@ -28,14 +26,7 @@ def dashboard(
 
     user = db.query(User).get(int(user_id))
 
-    # 🔄 Mise à jour CO2 basé sur le temps d'étude
-    user.co2_consumed = round(user.study_time * CO2_PER_HOUR, 2)
-    db.commit()
-
     return templates.TemplateResponse(
         "dashboard.html",
-        {
-            "request": request,
-            "user": user
-        }
+        {"request": request, "user": user}
     )
