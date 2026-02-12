@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Bonjour {{ user.username }} 🌿</h2>
+
+<h2>👋 Bonjour {{ user.username }}</h2>
 
 <p>
-    Bienvenue dans ton espace EcoLearn AI.
-    Chaque minute d’apprentissage contribue à un monde plus durable.
+    Bienvenue sur <strong>EcoLearn AI</strong>.  
+    Chaque session d’apprentissage contribue à réduire ton empreinte carbone
+    et à financer des actions positives pour la planète 🌱
 </p>
 
-<ul>
-    <li>🌳 Arbres financés : {{ user.trees_financed }}</li>
-    <li>⏱ Temps d’étude total : {{ user.study_time }} h</li>
+<ul style="margin-top: 20px;">
+    <li>🌳 Arbres financés : <strong>{{ user.trees_financed }}</strong></li>
+    <li>⏱ Temps total d’étude : <strong>{{ user.study_time }} h</strong></li>
 </ul>
 
-<a href="/generator" class="btn btn-primary">Accéder à l’apprentissage</a>
+<!-- CTA UNIFIÉS -->
+<div class="cta-group">
+    <a href="/generator" class="btn btn-primary">
+        🤖 Générer un parcours IA
+    </a>
+
+    <a href="/impact" class="btn btn-outline">
+        🌍 Impact & Reforestation
+    </a>
+</div>
+
 {% endblock %}
