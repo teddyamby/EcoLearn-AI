@@ -2,9 +2,12 @@ fastapi
 uvicorn
 sqlalchemy
 psycopg2-binary
-passlib[bcrypt]
 python-jose
-openai
-pytest
 python-multipart
 jinja2
+openai
+pytest
+
+# 🔒 versions verrouillées (IMPORTANT)
+passlib==1.7.4
+bcrypt==4.1.3
