@@ -22,5 +22,8 @@ def generate(
 
     return templates.TemplateResponse(
         "learning.html",
-        {"request": request, "course": course}
+        {
+            "request": request,
+            "course": course
+        }
     )
