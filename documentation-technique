@@ -1,0 +1,60 @@
+1. Architecture de l’application
+
+EcoLearn AI repose sur une architecture full-stack découplée, basée sur des principes modernes :
+
+Frontend : React + D3.js
+→ Interface utilisateur, visualisation de l’impact écologique
+
+Backend : FastAPI
+→ API REST, logique métier, IA, sécurité
+
+Base de données : PostgreSQL
+→ Persistance des utilisateurs, parcours et métriques carbone
+
+Chaque composant est isolé dans un conteneur Docker, garantissant portabilité et scalabilité.
+
+ 2. Conteneurisation & Déploiement
+
+L’application est entièrement conteneurisée via Docker :
+
+Un conteneur par service
+
+Orchestration locale via Docker Compose
+
+Déploiement cloud automatisé sur Render
+
+Les variables sensibles (clés API, DB) sont gérées par des variables d’environnement, garantissant la sécurité.
+
+ 3. CI/CD & Qualité Logicielle
+
+Un pipeline CI/CD est mis en place avec GitHub Actions :
+
+Tests unitaires automatiques (pytest)
+
+Analyse de code avec SonarCloud
+
+Build des images Docker
+
+Déploiement automatique en production
+
+La qualité est contrôlée à chaque push, empêchant toute régression.
+
+ 4. Documentation & Exploitabilité
+
+Le projet est entièrement documenté :
+
+README détaillé
+
+Architecture expliquée
+
+Procédures d’installation et de déploiement
+
+Description des choix techniques
+
+Cette documentation garantit :
+
+La maintenabilité
+
+La reprise du projet par une autre équipe
+
+L’exploitabilité en contexte professionnel
