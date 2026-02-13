@@ -1,0 +1,80 @@
+name: EcoLearn AI CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+
+  lint-test:
+    name: Tests & Qualité
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: ecolearn
+          POSTGRES_USER: ecolearn
+          POSTGRES_PASSWORD: ecolearn
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Run tests
+        env:
+          DATABASE_URL: postgresql://ecolearn:ecolearn@localhost:5432/ecolearn
+        run: |
+          cd backend
+          pytest --cov=app --cov-report=xml
+
+  sonar:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    needs: lint-test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: sonar
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker images
+        run: docker compose build
+
+  deploy:
+    name: Deploy (Render)
+    runs-on: ubuntu-latest
+    needs: docker
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy
+        run: echo "Render auto-deploy via GitHub push"
